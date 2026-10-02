@@ -91,7 +91,523 @@
             color: #cbd5e1 !important;
             border-radius: 0.75rem !important;
         }
-    </style>
+
+        /* =========================================================
+           TEMA SENA - DISEÑO ADAPTADO DEL PORTAL ACADÉMICO
+        ========================================================== */
+        :root {
+            --sena-green: #39A900;
+            --sena-green-dark: #007832;
+            --sena-blue: #00304D;
+            --sena-purple: #71277A;
+            --sena-cyan: #50E5F9;
+            --sena-yellow: #FDC300;
+            --sena-bg: #0B1110;
+            --sena-card: #101817;
+            --sena-input: #17221F;
+            --sena-border: rgba(57,169,0,.20);
+            --sena-border-focus: rgba(57,169,0,.60);
+        }
+
+        html, body {
+            background: var(--sena-bg) !important;
+            color: #F6F6F6 !important;
+        }
+
+        body {
+            font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif !important;
+        }
+
+        ::-webkit-scrollbar-track { background: var(--sena-bg) !important; }
+        ::-webkit-scrollbar-thumb { background: var(--sena-green-dark) !important; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--sena-green) !important; }
+
+        /* Sidebar flotante */
+        #sidebar {
+            position: fixed !important;
+            top: 20px !important;
+            left: 20px !important;
+            bottom: 20px !important;
+            width: 82px !important;
+            min-width: 82px !important;
+            height: auto !important;
+            background: var(--sena-card) !important;
+            border: 1px solid var(--sena-border) !important;
+            border-radius: 28px !important;
+            padding: 18px 12px !important;
+            box-shadow: 0 20px 50px rgba(0,0,0,.25) !important;
+            backdrop-filter: none !important;
+        }
+
+        #sidebar > div:first-child {
+            width: 100% !important;
+        }
+
+        #sidebar > div:first-child > div:first-child {
+            height: auto !important;
+            padding: 0 !important;
+            border: 0 !important;
+            justify-content: center !important;
+            margin-bottom: 28px !important;
+        }
+
+        #brand-logo {
+            justify-content: center !important;
+        }
+
+        #brand-logo > div:first-child {
+            width: 48px !important;
+            height: 48px !important;
+            border-radius: 16px !important;
+            background: var(--sena-green) !important;
+            box-shadow: 0 8px 20px rgba(57,169,0,.20) !important;
+        }
+
+        #brand-logo .sidebar-text {
+            display: none !important;
+        }
+
+        #toggle-sidebar {
+            display: none !important;
+        }
+
+        #sidebar nav {
+            padding: 0 !important;
+            margin-top: 0 !important;
+            max-height: none !important;
+            overflow: visible !important;
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            gap: 10px !important;
+        }
+
+        #sidebar .nav-item,
+        #sidebar nav > div > button {
+            width: 48px !important;
+            height: 48px !important;
+            min-width: 48px !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            border-radius: 16px !important;
+            background: transparent !important;
+            color: #A7B2AD !important;
+            border: 0 !important;
+            justify-content: center !important;
+            transition: all .25s ease !important;
+        }
+
+        #sidebar .nav-item:hover,
+        #sidebar nav > div > button:hover {
+            background: var(--sena-input) !important;
+            color: #fff !important;
+            transform: translateY(-2px) !important;
+        }
+
+        #sidebar .nav-item.active {
+            background: var(--sena-green) !important;
+            color: #fff !important;
+            box-shadow: 0 8px 20px rgba(57,169,0,.25) !important;
+        }
+
+        #sidebar .nav-item i,
+        #sidebar nav > div > button i:first-child {
+            color: currentColor !important;
+            width: 20px !important;
+            height: 20px !important;
+        }
+
+        #sidebar .nav-item span,
+        #sidebar nav > div > button .sidebar-text,
+        #sidebar .sidebar-text {
+            display: none !important;
+        }
+
+        #aprendices-submenu {
+            display: none !important;
+        }
+
+        #sidebar > div:last-child {
+            padding: 0 !important;
+            border: 0 !important;
+        }
+
+        #sidebar > div:last-child button {
+            width: 48px !important;
+            height: 48px !important;
+            padding: 0 !important;
+            justify-content: center !important;
+            border-radius: 16px !important;
+            color: #A7B2AD !important;
+        }
+
+        #sidebar > div:last-child button:hover {
+            background: rgba(113,39,122,.18) !important;
+            color: #c58bd0 !important;
+        }
+
+        /* Contenido */
+        main {
+            margin-left: 102px !important;
+            background: var(--sena-bg) !important;
+        }
+
+        #main-content {
+            padding: 28px 30px 40px !important;
+            background: var(--sena-bg) !important;
+        }
+
+        header {
+            height: auto !important;
+            min-height: 72px !important;
+            margin: 20px 30px 0 !important;
+            padding: 14px 20px !important;
+            background: var(--sena-card) !important;
+            border: 1px solid var(--sena-border) !important;
+            border-radius: 22px !important;
+            backdrop-filter: none !important;
+        }
+
+        #global-search {
+            background: var(--sena-input) !important;
+            border: 1px solid var(--sena-border) !important;
+            color: #F6F6F6 !important;
+            border-radius: 14px !important;
+        }
+
+        #global-search:focus {
+            border-color: var(--sena-green) !important;
+            box-shadow: 0 0 0 3px rgba(57,169,0,.08) !important;
+        }
+
+        /* Tarjetas */
+        #main-content .bg-\[\#181332\] {
+            background: var(--sena-card) !important;
+            border-color: var(--sena-border) !important;
+            box-shadow: 0 12px 35px rgba(0,0,0,.16) !important;
+            border-radius: 22px !important;
+        }
+
+        #main-content .bg-\[\#181332\]:hover {
+            border-color: var(--sena-border-focus) !important;
+        }
+
+        #main-content .bg-purple-950\/40,
+        #main-content .bg-purple-950\/50,
+        #main-content .bg-purple-950\/60,
+        #main-content .bg-purple-950\/80,
+        #main-content .bg-purple-900\/20,
+        #main-content .bg-purple-900\/30 {
+            background: var(--sena-input) !important;
+        }
+
+        #main-content [class*="border-purple-"] {
+            border-color: var(--sena-border) !important;
+        }
+
+        /* Títulos y textos */
+        #main-content h1,
+        #main-content h2,
+        #main-content h3,
+        #main-content h4 {
+            color: #FFFFFF !important;
+        }
+
+        #main-content [class*="text-purple-400"],
+        #main-content [class*="text-purple-300"] {
+            color: #A7B2AD !important;
+        }
+
+        #main-content [class*="text-purple-200"] {
+            color: #F6F6F6 !important;
+        }
+
+        /* Verde institucional */
+        #main-content [class*="text-brand-"] {
+            color: var(--sena-green) !important;
+        }
+
+        #main-content [class*="bg-brand-"] {
+            background: var(--sena-green) !important;
+        }
+
+        #main-content [class*="border-brand-"] {
+            border-color: var(--sena-green) !important;
+        }
+
+        #main-content [class*="from-brand-"] {
+            --tw-gradient-from: var(--sena-green) !important;
+        }
+
+        #main-content [class*="to-brand-"] {
+            --tw-gradient-to: var(--sena-green-dark) !important;
+        }
+
+        /* Inputs */
+        #main-content input,
+        #main-content select,
+        #main-content textarea {
+            background: var(--sena-input) !important;
+            color: #F6F6F6 !important;
+            border-color: var(--sena-border) !important;
+            border-radius: 12px !important;
+        }
+
+        #main-content input:focus,
+        #main-content select:focus,
+        #main-content textarea:focus {
+            border-color: var(--sena-green) !important;
+            box-shadow: 0 0 0 3px rgba(57,169,0,.08) !important;
+        }
+
+        /* Tablas */
+        #main-content table thead {
+            background: rgba(23,34,31,.8) !important;
+        }
+
+        #main-content table th {
+            color: #7F8D87 !important;
+            border-color: var(--sena-border) !important;
+        }
+
+        #main-content table td {
+            border-color: rgba(57,169,0,.08) !important;
+        }
+
+        #main-content table tbody tr:hover {
+            background: rgba(57,169,0,.035) !important;
+        }
+
+        /* Botones */
+        #main-content button.bg-gradient-to-r {
+            background: var(--sena-green) !important;
+            box-shadow: 0 8px 20px rgba(57,169,0,.20) !important;
+        }
+
+        #main-content button.bg-gradient-to-r:hover {
+            background: var(--sena-green-dark) !important;
+        }
+
+        /* Responsive */
+        @media (max-width: 700px) {
+            body {
+                padding-bottom: 95px !important;
+            }
+
+            #sidebar {
+                position: fixed !important;
+                top: auto !important;
+                left: 15px !important;
+                right: 15px !important;
+                bottom: 15px !important;
+                width: auto !important;
+                height: 65px !important;
+                min-width: 0 !important;
+                padding: 8px 12px !important;
+                flex-direction: row !important;
+                border-radius: 20px !important;
+            }
+
+            #brand-logo,
+            #sidebar > div:first-child > div:first-child {
+                margin: 0 !important;
+            }
+
+            #brand-logo > div:first-child {
+                width: 43px !important;
+                height: 43px !important;
+            }
+
+            #sidebar nav {
+                flex-direction: row !important;
+                justify-content: center !important;
+                gap: 4px !important;
+                width: 100% !important;
+            }
+
+            #sidebar .nav-item,
+            #sidebar nav > div > button {
+                width: 42px !important;
+                height: 42px !important;
+                min-width: 42px !important;
+                border-radius: 13px !important;
+            }
+
+            #sidebar .nav-item:nth-child(n+5) {
+                display: none !important;
+            }
+
+            #sidebar > div:last-child {
+                margin-left: auto !important;
+            }
+
+            main {
+                margin-left: 0 !important;
+            }
+
+            header {
+                margin: 15px !important;
+                border-radius: 18px !important;
+            }
+
+            #main-content {
+                padding: 20px 15px 95px !important;
+            }
+        }
+
+    
+
+/* ===== NAVEGACION LATERAL EXPANDIDA ===== */
+#sidebar {
+    width: 250px !important;
+    min-width: 250px !important;
+}
+#sidebar > div:first-child > div:first-child {
+    justify-content: flex-start !important;
+    padding: 0 6px !important;
+}
+#brand-logo {
+    justify-content: flex-start !important;
+}
+#brand-logo .sidebar-text {
+    display: inline-flex !important;
+}
+#sidebar nav {
+    align-items: stretch !important;
+}
+#sidebar .nav-item,
+#sidebar nav > div > button {
+    width: 100% !important;
+    min-width: 0 !important;
+    height: 48px !important;
+    padding: 0 14px !important;
+    justify-content: flex-start !important;
+    gap: 12px !important;
+}
+#sidebar .nav-item .sidebar-text,
+#sidebar nav > div > button .sidebar-text {
+    display: inline-flex !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+#sidebar #aprendices-submenu {
+    display: block !important;
+    width: 100% !important;
+}
+#sidebar #aprendices-submenu .sidebar-text {
+    display: inline-flex !important;
+}
+#sidebar .border-t {
+    width: 100% !important;
+}
+#sidebar + main {
+    margin-left: 270px !important;
+}
+@media (max-width: 768px) {
+    #sidebar {
+        width: calc(100% - 32px) !important;
+        min-width: 0 !important;
+    }
+    #brand-logo .sidebar-text,
+    #sidebar .nav-item .sidebar-text,
+    #sidebar nav > div > button .sidebar-text,
+    #sidebar .border-t .sidebar-text {
+        display: none !important;
+    }
+    #sidebar nav {
+        align-items: center !important;
+        flex-direction: row !important;
+        justify-content: space-around !important;
+    }
+    #sidebar .nav-item,
+    #sidebar nav > div > button {
+        width: 48px !important;
+        min-width: 48px !important;
+        padding: 0 !important;
+        justify-content: center !important;
+    }
+    #sidebar + main {
+        margin-left: 0 !important;
+    }
+}
+/* ===== AJUSTES SOLICITADOS: NAVEGACION EXPANDIDA Y CALIFICACIONES ===== */
+#sidebar .sidebar-text {
+    display: inline-flex !important;
+    align-items: center;
+}
+#sidebar .nav-item,
+#sidebar .sidebar-footer button {
+    width: 100% !important;
+}
+#sidebar .nav-item {
+    justify-content: flex-start !important;
+}
+#sidebar .nav-item .sidebar-text {
+    overflow: visible !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+#sidebar #aprendices-submenu {
+    display: block !important;
+}
+#sidebar #aprendices-submenu .sidebar-text {
+    display: inline-flex !important;
+}
+#sidebar .nav-item:hover {
+    transform: translateX(2px);
+}
+@media (max-width: 768px) {
+    #sidebar {
+        width: calc(100% - 32px) !important;
+        left: 16px !important;
+        right: 16px !important;
+        top: auto !important;
+        bottom: 16px !important;
+        height: auto !important;
+        min-height: 68px !important;
+        border-radius: 22px !important;
+        overflow-x: auto !important;
+    }
+    #sidebar .sidebar-text {
+        display: none !important;
+    }
+    #sidebar .nav-item {
+        width: auto !important;
+        min-width: 52px !important;
+        justify-content: center !important;
+    }
+    #sidebar #aprendices-submenu {
+        display: none !important;
+    }
+    #sidebar + main {
+        margin-left: 0 !important;
+        padding-bottom: 100px !important;
+    }
+}
+
+        /* NAVEGACIÓN SENA EXPANDIDA: icono + nombre de función */
+        #sidebar { width: 250px !important; min-width: 250px !important; padding: 18px 14px !important; }
+        #sidebar #brand-logo { justify-content: flex-start !important; }
+        #sidebar #brand-logo .sidebar-text { display:flex !important; }
+        #sidebar #sidebar-text { display:flex !important; }
+        #sidebar .nav-item, #sidebar nav > div > button { width:100% !important; min-width:0 !important; height:48px !important; padding:0 14px !important; justify-content:flex-start !important; }
+        #sidebar .nav-item span, #sidebar nav > div > button .sidebar-text { display:inline-flex !important; }
+        #sidebar .nav-item i, #sidebar nav > div > button i:first-child { flex-shrink:0 !important; }
+        #sidebar nav > div > button { justify-content:space-between !important; }
+        #sidebar nav > div > button > div { display:flex !important; align-items:center !important; gap:12px !important; }
+        #aprendices-submenu { display:block !important; }
+        main { margin-left:270px !important; }
+        @media (max-width: 900px) {
+            #sidebar { width:82px !important; min-width:82px !important; }
+            #sidebar #brand-logo .sidebar-text, #sidebar .nav-item span, #sidebar nav > div > button .sidebar-text { display:none !important; }
+            #sidebar .nav-item, #sidebar nav > div > button { width:48px !important; padding:0 !important; justify-content:center !important; }
+            #sidebar nav > div > button > div { gap:0 !important; }
+            main { margin-left:102px !important; }
+            #aprendices-submenu { display:none !important; }
+        }
+
+        
+</style>
 </head>
 <body class="h-full text-slate-200 bg-[#0d0a1a] flex overflow-hidden">
 
@@ -623,67 +1139,44 @@
                 </div>
             </section>
 
-            <!-- VIEW 4: GESTIÓN DE NOTAS Y CALIFICACIONES -->
+            <!-- VIEW 4: GESTIÓN DE CALIFICACIONES -->
             <section id="view-notas" class="hidden space-y-6">
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                    <div>
-                        <h1 class="text-2xl font-bold text-white tracking-tight">Gestión de Calificaciones</h1>
-                        <p class="text-xs text-purple-400 mt-1">Asigna, modifica y evalúa los módulos académicos de los aprendices.</p>
-                    </div>
-                    <div class="flex items-center gap-3">
-                        <button onclick="openGradeModal()" class="bg-gradient-to-r from-brand-600 to-brand-500 hover:from-brand-500 hover:to-brand-400 text-white font-medium px-4 py-2.5 rounded-xl text-sm shadow-lg shadow-brand-600/30 flex items-center gap-2 transition-all">
-                            <i data-lucide="plus-circle" class="w-4 h-4"></i> Registrar Calificación
-                        </button>
-                    </div>
+                <div>
+                    <h1 class="text-2xl font-bold text-white tracking-tight">Gestión de Calificaciones</h1>
+                    <p class="text-xs text-slate-400 mt-1">Selecciona una ficha y define si sus aprendices aprueban o no.</p>
                 </div>
 
-                <!-- Filter Controls for Grades -->
-                <div class="bg-[#181332] border border-purple-900/30 p-4 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-4 glow-card">
-                    <div class="flex flex-col sm:flex-row items-center gap-3 w-full md:w-auto">
-                        <select id="grade-module-filter" onchange="renderGradesTable()" class="bg-purple-950/60 border border-purple-800/40 text-xs text-purple-100 rounded-xl px-3.5 py-2.5 focus:outline-none focus:border-brand-500 w-full sm:w-auto">
-                            <option value="todos">Todos los Módulos</option>
-                            <option value="Lógica de Programación">Lógica de Programación</option>
-                            <option value="Bases de Datos SQL">Bases de Datos SQL</option>
-                            <option value="Arquitectura Frontend">Arquitectura Frontend</option>
-                            <option value="Ciberseguridad Básica">Ciberseguridad Básica</option>
-                        </select>
-
-                        <div class="relative w-full sm:w-64">
-                            <i data-lucide="search" class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-purple-400"></i>
-                            <input type="text" id="search-grade-student" onkeyup="filterGradesTable()" placeholder="Buscar aprendiz..." class="w-full bg-purple-950/60 border border-purple-800/40 rounded-xl pl-9 pr-3 py-2 text-xs text-purple-100 placeholder-purple-400/60 focus:outline-none focus:border-brand-500">
+                <div class="bg-[#101817] border border-green-900/30 p-5 rounded-2xl">
+                    <div class="flex items-center justify-between mb-4">
+                        <div>
+                            <h2 class="text-sm font-bold text-white">Fichas</h2>
+                            <p class="text-[11px] text-slate-400 mt-1">Cada ficha muestra únicamente el listado de sus estudiantes.</p>
                         </div>
                     </div>
-
-                    <div class="flex items-center gap-4 text-xs">
-                        <div class="flex items-center gap-1.5">
-                            <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
-                            <span class="text-purple-300">Aprobados: <strong class="text-white" id="count-aprobados">0</strong></span>
-                        </div>
-                        <div class="flex items-center gap-1.5">
-                            <span class="w-2.5 h-2.5 rounded-full bg-rose-500"></span>
-                            <span class="text-purple-300">Deficientes: <strong class="text-white" id="count-deficientes">0</strong></span>
-                        </div>
-                    </div>
+                    <div id="grade-fichas-cards" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4"></div>
                 </div>
 
-                <!-- Table of Grades -->
-                <div class="bg-[#181332] border border-purple-900/30 rounded-2xl overflow-hidden glow-card">
+                <div id="grade-students-panel" class="bg-[#101817] border border-green-900/30 rounded-2xl overflow-hidden">
+                    <div class="px-5 py-4 border-b border-green-900/30 flex flex-col md:flex-row md:items-center justify-between gap-3">
+                        <div>
+                            <h3 class="text-sm font-bold text-white" id="grade-selection-label">Selecciona una ficha</h3>
+                            <p class="text-[11px] text-slate-400 mt-1">Aprueba o no aprueba a cada aprendiz de la ficha.</p>
+                        </div>
+                        <div id="grade-bulk-actions" class="hidden flex-wrap gap-2">
+                            <button onclick="setBulkGrade(true)" class="px-4 py-2 rounded-xl text-xs font-bold bg-green-500/15 border border-green-500/30 text-green-300 hover:bg-green-500/25 flex items-center gap-2">
+                                <i data-lucide="check-check" class="w-4 h-4"></i> Aprobar a todos
+                            </button>
+                            <button onclick="setBulkGrade(false)" class="px-4 py-2 rounded-xl text-xs font-bold bg-red-500/15 border border-red-500/30 text-red-300 hover:bg-red-500/25 flex items-center gap-2">
+                                <i data-lucide="x-circle" class="w-4 h-4"></i> No aprobar a todos
+                            </button>
+                        </div>
+                    </div>
                     <div class="overflow-x-auto">
-                        <table class="w-full text-left text-xs" id="table-grades">
-                            <thead class="text-purple-300 border-b border-purple-900/40 uppercase tracking-wider bg-purple-950/50">
-                                <tr>
-                                    <th class="p-4">Aprendiz</th>
-                                    <th class="p-4">Módulo / Asignatura</th>
-                                    <th class="p-4">Evidencia / Tarea</th>
-                                    <th class="p-4">Nota (1.0 - 5.0)</th>
-                                    <th class="p-4">Estado</th>
-                                    <th class="p-4">Fecha Registro</th>
-                                    <th class="p-4 text-center">Acciones</th>
-                                </tr>
+                        <table class="w-full text-left text-xs">
+                            <thead class="text-slate-300 border-b border-green-900/30 uppercase tracking-wider bg-[#17221F]">
+                                <tr><th class="p-4">Estudiante</th><th class="p-4">Documento</th><th class="p-4">Resultado</th><th class="p-4 text-center">Acción</th></tr>
                             </thead>
-                            <tbody class="divide-y divide-purple-900/20 text-purple-200" id="grades-tbody">
-                                <!-- Dynamic JS Grades -->
-                            </tbody>
+                            <tbody class="divide-y divide-green-900/20 text-slate-200" id="grades-tbody"></tbody>
                         </table>
                     </div>
                 </div>
@@ -801,7 +1294,7 @@
                                     <th class="p-4">Documento</th>
                                     <th class="p-4">Ficha & Programa</th>
                                     <th class="p-4">Estado</th>
-                                    <th class="p-4">Asistencia</th>
+                                    <th class="p-4">Asistencia / Fallas</th>
                                     <th class="p-4">Promedio</th>
                                     <th class="p-4 text-center">Acciones</th>
                                 </tr>
@@ -819,6 +1312,23 @@
             </section>
         </div>
     </main>
+
+    <!-- MODAL: GESTIONAR FALLA Y EXCUSA -->
+    <div id="modal-excusa" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-[#101817] border border-green-800/50 rounded-2xl w-full max-w-lg overflow-hidden shadow-2xl">
+            <div class="px-6 py-4 border-b border-green-900/40 flex items-center justify-between">
+                <div><h3 class="text-base font-bold text-white">Modificar falla</h3><p class="text-[11px] text-slate-400 mt-1" id="excuse-student-name"></p></div>
+                <button onclick="closeExcuseModal()" class="p-1 rounded-lg text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
+            </div>
+            <form onsubmit="saveExcuse(event)" class="p-6 space-y-4">
+                <input type="hidden" id="excuse-student-id">
+                <div><label class="block text-xs font-medium text-slate-300 mb-1">Fecha de la falla</label><input type="date" id="excuse-date" required class="w-full bg-[#17221F] border border-green-900/40 rounded-xl px-3 py-2.5 text-xs text-white"></div>
+                <div><label class="block text-xs font-medium text-slate-300 mb-1">Estado</label><select id="excuse-status" class="w-full bg-[#17221F] border border-green-900/40 rounded-xl px-3 py-2.5 text-xs text-white"><option value="justificada">Falla justificada</option><option value="injustificada">Falla injustificada</option></select></div>
+                <div><label class="block text-xs font-medium text-slate-300 mb-1">Excusa válida / observación</label><textarea id="excuse-note" rows="3" placeholder="Escribe la observación o registra la excusa..." class="w-full bg-[#17221F] border border-green-900/40 rounded-xl px-3 py-2.5 text-xs text-white"></textarea></div>
+                <div class="flex justify-end gap-2"><button type="button" onclick="closeExcuseModal()" class="px-4 py-2 rounded-xl text-xs text-slate-300 border border-slate-700">Cancelar</button><button type="submit" class="px-4 py-2 rounded-xl text-xs font-bold bg-[#39A900] text-white">Guardar cambio</button></div>
+            </form>
+        </div>
+    </div>
 
     <!-- MODAL 1: REGISTRAR / EDITAR APRENDIZ -->
     <div id="modal-aprendiz" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
@@ -942,11 +1452,11 @@
     <script>
         // Data Structures for System
         let aprendicesData = [
-            { id: 1, nombre: "Juan Sebastian Silva", doc: "101829381", email: "juan.silva@sena.edu.co", ficha: "284910 - ADSO", estado: "Activo", asistencia: 96, promedio: 4.8 },
-            { id: 2, nombre: "Maria Camila Torres", doc: "102938471", email: "mc.torres@sena.edu.co", ficha: "284910 - ADSO", estado: "En Riesgo", asistencia: 74, promedio: 3.1 },
-            { id: 3, nombre: "Andrés Felipe Ruiz", doc: "109837128", email: "af.ruiz@sena.edu.co", ficha: "271029 - Ciberseguridad", estado: "Activo", asistencia: 92, promedio: 4.5 },
-            { id: 4, nombre: "Laura Sofia Restrepo", doc: "103291823", email: "ls.restrepo@sena.edu.co", ficha: "291024 - Redes Cisco", estado: "Activo", asistencia: 98, promedio: 4.9 },
-            { id: 5, nombre: "Diego Alejandro Patiño", doc: "108726351", email: "da.patino@sena.edu.co", ficha: "284910 - ADSO", estado: "Inactivo", asistencia: 50, promedio: 2.5 }
+            { id: 1, fallas: 1, nombre: "Juan Sebastian Silva", doc: "101829381", email: "juan.silva@sena.edu.co", ficha: "284910 - ADSO", estado: "Activo", asistencia: 96, promedio: 4.8 },
+            { id: 2, fallas: 3, nombre: "Maria Camila Torres", doc: "102938471", email: "mc.torres@sena.edu.co", ficha: "284910 - ADSO", estado: "En Riesgo", asistencia: 74, promedio: 3.1 },
+            { id: 3, fallas: 1, nombre: "Andrés Felipe Ruiz", doc: "109837128", email: "af.ruiz@sena.edu.co", ficha: "271029 - Ciberseguridad", estado: "Activo", asistencia: 92, promedio: 4.5 },
+            { id: 4, fallas: 0, nombre: "Laura Sofia Restrepo", doc: "103291823", email: "ls.restrepo@sena.edu.co", ficha: "291024 - Redes Cisco", estado: "Activo", asistencia: 98, promedio: 4.9 },
+            { id: 5, fallas: 5, nombre: "Diego Alejandro Patiño", doc: "108726351", email: "da.patino@sena.edu.co", ficha: "284910 - ADSO", estado: "Inactivo", asistencia: 50, promedio: 2.5 }
         ];
 
         let inventarioAmbientesData = {
@@ -984,9 +1494,12 @@
         ];
 
         let gradesData = [
-            { id: 201, studentName: "Juan Sebastian Silva", module: "Lógica de Programación", task: "Algoritmos Estructurados", score: 4.8, date: "2026-09-12" },
-            { id: 202, studentName: "Maria Camila Torres", module: "Lógica de Programación", task: "Algoritmos Estructurados", score: 2.9, date: "2026-09-12" },
-            { id: 203, studentName: "Andrés Felipe Ruiz", module: "Bases de Datos SQL", task: "Consultas Complejas & JOINs", score: 4.5, date: "2026-09-20" }
+            { id: 201, studentName: "Juan Sebastian Silva", ficha: "284910 - ADSO", module: "Lógica de Programación", task: "Algoritmos Estructurados", score: 4.8, date: "2026-09-12" },
+            { id: 202, studentName: "Maria Camila Torres", ficha: "284910 - ADSO", module: "Lógica de Programación", task: "Algoritmos Estructurados", score: 2.9, date: "2026-09-12" },
+            { id: 203, studentName: "Andrés Felipe Ruiz", ficha: "271029 - Ciberseguridad", module: "Bases de Datos SQL", task: "Consultas Complejas & JOINs", score: 4.5, date: "2026-09-20" },
+            { id: 204, studentName: "Laura Valentina Pérez", ficha: "284910 - ADSO", module: "Lógica de Programación", task: "Algoritmos Estructurados", score: 3.2, date: "2026-09-12" },
+            { id: 205, studentName: "Carlos Andrés Gómez", ficha: "284910 - ADSO", module: "Bases de Datos SQL", task: "Modelo Relacional", score: 4.1, date: "2026-09-18" },
+            { id: 206, studentName: "Sofía Martínez", ficha: "271029 - Ciberseguridad", module: "Bases de Datos SQL", task: "Consultas Complejas & JOINs", score: 2.7, date: "2026-09-20" }
         ];
 
         let eventsData = [
@@ -1007,6 +1520,8 @@
             startLiveClocks();
             initCharts();
             renderAprendicesTable();
+            renderGradeFichas();
+            renderGradesTable();
             cargarInventarioAmbiente();
             renderHistorialAmbientes();
             renderTablaMarcaciones();
@@ -1310,109 +1825,104 @@
         }
 
         // GRADES MANAGEMENT RENDER & LOGIC
-        function renderGradesTable() {
-            const tbody = document.getElementById('grades-tbody');
-            const moduleFilter = document.getElementById('grade-module-filter').value;
-            tbody.innerHTML = '';
+        function getGradeRecord(student, module) {
+            return gradesData.find(g => g.studentName === student.nombre && g.module === module);
+        }
 
-            let filtered = gradesData.filter(g => {
-                if (moduleFilter === 'todos') return true;
-                return g.module === moduleFilter;
-            });
-
-            let aprobados = 0, deficientes = 0;
-
-            filtered.forEach(item => {
-                if (item.score >= 3.5) aprobados++;
-                else deficientes++;
-
-                let statusBadge = item.score >= 3.5 
-                    ? `<span class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">Aprobado</span>`
-                    : `<span class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-rose-500/20 text-rose-300 border border-rose-500/30">Deficiente</span>`;
-
-                let row = `
-                    <tr class="hover:bg-purple-900/20 transition-colors">
-                        <td class="p-4 font-semibold text-white">${item.studentName}</td>
-                        <td class="p-4 text-purple-300">${item.module}</td>
-                        <td class="p-4 text-purple-200">${item.task}</td>
-                        <td class="p-4 font-bold text-base ${item.score >= 3.5 ? 'text-emerald-400' : 'text-rose-400'}">${item.score} / 5.0</td>
-                        <td class="p-4">${statusBadge}</td>
-                        <td class="p-4 text-purple-400 text-[11px]">${item.date}</td>
-                        <td class="p-4 text-center">
-                            <button onclick="deleteGrade(${item.id})" title="Eliminar" class="p-1.5 rounded-lg hover:bg-rose-500/20 text-rose-400 hover:text-rose-200">
-                                <i data-lucide="trash-2" class="w-4 h-4"></i>
-                            </button>
-                        </td>
-                    </tr>
-                `;
-                tbody.innerHTML += row;
-            });
-
-            document.getElementById('count-aprobados').textContent = aprobados;
-            document.getElementById('count-deficientes').textContent = deficientes;
+        function renderGradeFichasCards() {
+            const container = document.getElementById('grade-fichas-cards');
+            if (!container) return;
+            const fichas = [...new Set(aprendicesData.map(a => a.ficha))];
+            container.innerHTML = fichas.map(ficha => {
+                const students = aprendicesData.filter(a => a.ficha === ficha);
+                const evaluated = students.filter(a => gradesData.some(g => g.studentName === a.nombre));
+                const active = document.getElementById('grade-ficha-filter')?.value === ficha;
+                return `<button onclick="selectGradeFicha('${ficha}')" class="text-left p-4 rounded-2xl border transition-all ${active ? 'border-green-500 bg-green-500/10 shadow-lg shadow-green-900/20' : 'border-green-900/30 bg-[#17221F] hover:border-green-700/60'}">
+                    <div class="flex items-center justify-between gap-3">
+                        <div class="w-11 h-11 rounded-xl bg-green-500/15 flex items-center justify-center text-green-400"><i data-lucide="users-round" class="w-5 h-5"></i></div>
+                        <span class="text-[10px] px-2 py-1 rounded-full bg-green-500/10 text-green-300">${students.length} estudiantes</span>
+                    </div>
+                    <h3 class="mt-4 text-sm font-bold text-white">${ficha}</h3>
+                    <p class="text-[11px] text-slate-400 mt-1">${evaluated.length} con calificación registrada</p>
+                    <span class="inline-flex items-center gap-1 mt-3 text-[11px] font-semibold text-green-400">Gestionar ficha <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></span>
+                </button>`;
+            }).join('');
             lucide.createIcons();
         }
 
-        function filterGradesTable() {
-            const query = document.getElementById('search-grade-student').value.toLowerCase();
-            const rows = document.querySelectorAll('#table-grades tbody tr');
-            rows.forEach(row => {
-                row.style.display = row.innerText.toLowerCase().includes(query) ? '' : 'none';
-            });
-        }
-
-        function openGradeModal() {
-            const selectStudent = document.getElementById('gr-student');
-            selectStudent.innerHTML = '';
-            aprendicesData.forEach(a => {
-                selectStudent.innerHTML += `<option value="${a.nombre}">${a.nombre} - Ficha ${a.ficha}</option>`;
-            });
-
-            const modal = document.getElementById('modal-grade');
-            const container = document.getElementById('modal-grade-container');
-            modal.classList.remove('hidden');
-            setTimeout(() => {
-                container.classList.remove('scale-95', 'opacity-0');
-                container.classList.add('scale-100', 'opacity-100');
-            }, 10);
-        }
-
-        function closeGradeModal() {
-            const modal = document.getElementById('modal-grade');
-            const container = document.getElementById('modal-grade-container');
-            container.classList.remove('scale-100', 'opacity-100');
-            container.classList.add('scale-95', 'opacity-0');
-            setTimeout(() => modal.classList.add('hidden'), 200);
-        }
-
-        function handleGradeSubmit(e) {
-            e.preventDefault();
-            const studentName = document.getElementById('gr-student').value;
-            const module = document.getElementById('gr-module').value;
-            const task = document.getElementById('gr-task').value;
-            const score = parseFloat(document.getElementById('gr-score').value);
-
-            gradesData.unshift({
-                id: Date.now(),
-                studentName,
-                module,
-                task,
-                score,
-                date: new Date().toISOString().split('T')[0]
-            });
-
-            closeGradeModal();
+        function selectGradeFicha(ficha) {
+            document.getElementById('grade-ficha-filter').value = ficha;
             renderGradesTable();
-            Swal.fire('Calificación Registrada', 'La nota ha sido asignada correctamente.', 'success');
+            document.getElementById('table-grades')?.scrollIntoView({behavior:'smooth', block:'start'});
         }
 
-        function deleteGrade(id) {
-            gradesData = gradesData.filter(g => g.id !== id);
+        function renderGradeFichas() {
+            const container = document.getElementById('grade-fichas-cards');
+            if (!container) return;
+            const fichas = [...new Set(aprendicesData.map(a => a.ficha))];
+            container.innerHTML = fichas.map(ficha => {
+                const total = aprendicesData.filter(a => a.ficha === ficha).length;
+                return `<button onclick="selectGradeFicha('${ficha}')" class="text-left bg-[#17221F] border border-green-900/30 hover:border-[#39A900] p-4 rounded-2xl transition-all group">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm font-bold text-white">${ficha}</p>
+                            <p class="text-[11px] text-slate-400 mt-1">${total} aprendiz(es)</p>
+                        </div>
+                        <div class="p-2.5 rounded-xl bg-green-500/10 text-green-400"><i data-lucide="users" class="w-5 h-5"></i></div>
+                    </div>
+                </button>`;
+            }).join('');
+            lucide.createIcons();
+        }
+
+        let selectedGradeFicha = '';
+        function selectGradeFicha(ficha) {
+            selectedGradeFicha = ficha;
+            const label = document.getElementById('grade-selection-label');
+            if (label) label.textContent = `Ficha ${ficha}`;
+            const actions = document.getElementById('grade-bulk-actions');
+            if (actions) actions.classList.remove('hidden');
             renderGradesTable();
         }
 
-        // APRENDICES TABLE & CRUD
-        function renderAprendicesTable() {
+        function renderGradesTable() {
+            const tbody = document.getElementById('grades-tbody');
+            if (!tbody) return;
+            if (!selectedGradeFicha) {
+                tbody.innerHTML = `<tr><td colspan="4" class="p-8 text-center text-slate-400">Selecciona una ficha para ver sus estudiantes.</td></tr>`;
+                return;
+            }
+            const students = aprendicesData.filter(a => a.ficha === selectedGradeFicha);
+            tbody.innerHTML = students.map(student => {
+                const approved = student.aprobado === true;
+                const rejected = student.aprobado === false;
+                const status = approved ? `<span class="px-2.5 py-1 rounded-full bg-green-500/15 text-green-300 border border-green-500/30">Aprobado</span>` : rejected ? `<span class="px-2.5 py-1 rounded-full bg-red-500/15 text-red-300 border border-red-500/30">No aprobado</span>` : `<span class="px-2.5 py-1 rounded-full bg-yellow-500/15 text-yellow-300 border border-yellow-500/30">Pendiente</span>`;
+                return `<tr class="hover:bg-green-500/5 transition-colors">
+                    <td class="p-4 font-semibold text-white">${student.nombre}</td>
+                    <td class="p-4 text-slate-400 font-mono">${student.doc}</td>
+                    <td class="p-4">${status}</td>
+                    <td class="p-4 text-center"><div class="flex justify-center gap-2">
+                        <button onclick="setStudentGrade(${student.id}, true)" class="px-3 py-1.5 rounded-lg bg-green-500/15 text-green-300 border border-green-500/30 text-[11px] font-semibold">Aprobar</button>
+                        <button onclick="setStudentGrade(${student.id}, false)" class="px-3 py-1.5 rounded-lg bg-red-500/15 text-red-300 border border-red-500/30 text-[11px] font-semibold">No aprobar</button>
+                    </div></td>
+                </tr>`;
+            }).join('');
+        }
+
+        function setStudentGrade(id, approved) {
+            const student = aprendicesData.find(a => a.id === id);
+            if (!student) return;
+            student.aprobado = approved;
+            renderGradesTable();
+        }
+
+        function setBulkGrade(approved) {
+            if (!selectedGradeFicha) return;
+            aprendicesData.filter(a => a.ficha === selectedGradeFicha).forEach(a => a.aprobado = approved);
+            renderGradesTable();
+        }
+
+function renderAprendicesTable() {
             const tbody = document.getElementById('aprendices-tbody');
             tbody.innerHTML = '';
 
@@ -1449,6 +1959,7 @@
                                     <div class="bg-gradient-to-r from-brand-500 to-emerald-400 h-2 rounded-full" style="width: ${item.asistencia}%"></div>
                                 </div>
                                 <span class="text-[11px] font-semibold">${item.asistencia}%</span>
+                                <span class="text-[10px] text-rose-300">${item.fallas || 0} falla(s)</span>
                             </div>
                         </td>
                         <td class="p-4 font-bold text-white">${item.promedio}</td>
@@ -1456,6 +1967,9 @@
                             <div class="flex items-center justify-center gap-1">
                                 <button onclick="openEditModal(${item.id})" title="Editar" class="p-1.5 rounded-lg hover:bg-purple-800/40 text-purple-300 hover:text-white">
                                     <i data-lucide="edit-3" class="w-4 h-4"></i>
+                                </button>
+                                <button onclick="openExcuseModal(${item.id})" title="Gestionar falla / excusa" class="p-1.5 rounded-lg hover:bg-amber-500/20 text-amber-300 hover:text-white">
+                                    <i data-lucide="file-check-2" class="w-4 h-4"></i>
                                 </button>
                                 <button onclick="deleteAprendiz(${item.id})" title="Eliminar" class="p-1.5 rounded-lg hover:bg-rose-500/20 text-rose-400 hover:text-rose-200">
                                     <i data-lucide="trash-2" class="w-4 h-4"></i>
@@ -1482,6 +1996,35 @@
             rows.forEach(row => {
                 row.style.display = row.innerText.toLowerCase().includes(query) ? '' : 'none';
             });
+        }
+
+        function openExcuseModal(id) {
+            const student = aprendicesData.find(a => a.id === id);
+            if (!student) return;
+            document.getElementById('excuse-student-id').value = id;
+            document.getElementById('excuse-student-name').textContent = `${student.nombre} · ${student.fallas || 0} falla(s)`;
+            document.getElementById('excuse-date').value = new Date().toISOString().split('T')[0];
+            document.getElementById('excuse-status').value = 'justificada';
+            document.getElementById('excuse-note').value = '';
+            document.getElementById('modal-excusa').classList.remove('hidden');
+            lucide.createIcons();
+        }
+
+        function closeExcuseModal() {
+            document.getElementById('modal-excusa').classList.add('hidden');
+        }
+
+        function saveExcuse(event) {
+            event.preventDefault();
+            const id = Number(document.getElementById('excuse-student-id').value);
+            const student = aprendicesData.find(a => a.id === id);
+            if (!student) return;
+            if (document.getElementById('excuse-status').value === 'justificada') {
+                student.fallas = Math.max(0, (student.fallas || 0) - 1);
+            }
+            renderAprendicesTable();
+            closeExcuseModal();
+            Swal.fire({icon:'success', title:'Falla actualizada', text:'La novedad y la excusa fueron registradas.', confirmButtonColor:'#39A900'});
         }
 
         function openCreateModal() {
