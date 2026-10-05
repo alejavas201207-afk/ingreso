@@ -677,6 +677,19 @@
                     </div>
                 </div>
 
+                <a href="#" onclick="switchView('transversales')" id="nav-transversales" class="nav-item flex items-center gap-3 px-3.5 py-3 rounded-xl text-purple-200/80 hover:bg-brand-600/20 hover:text-white transition-all group">
+                    <i data-lucide="book-open" class="w-5 h-5 text-brand-400 group-hover:scale-110 transition-transform"></i>
+                    <span class="sidebar-text font-medium text-sm whitespace-nowrap">Transversales</span>
+                </a>
+                <a href="#" onclick="switchView('instructor-fichas')" id="nav-instructor-fichas" class="nav-item flex items-center gap-3 px-3.5 py-3 rounded-xl text-purple-200/80 hover:bg-brand-600/20 hover:text-white transition-all group">
+                    <i data-lucide="presentation" class="w-5 h-5 text-brand-400 group-hover:scale-110 transition-transform"></i>
+                    <span class="sidebar-text font-medium text-sm whitespace-nowrap">Fichas del Instructor</span>
+                </a>
+                <a href="#" onclick="switchView('jefatura-ficha')" id="nav-jefatura-ficha" class="nav-item flex items-center gap-3 px-3.5 py-3 rounded-xl text-purple-200/80 hover:bg-brand-600/20 hover:text-white transition-all group">
+                    <i data-lucide="shield-check" class="w-5 h-5 text-brand-400 group-hover:scale-110 transition-transform"></i>
+                    <span class="sidebar-text font-medium text-sm whitespace-nowrap">Jefe de Ficha</span>
+                </a>
+
                 <!-- Eventos / Calendario -->
                 <a href="#" onclick="switchView('eventos')" id="nav-eventos" class="nav-item flex items-center gap-3 px-3.5 py-3 rounded-xl text-purple-200/80 hover:bg-brand-600/20 hover:text-white transition-all group">
                     <i data-lucide="calendar" class="w-5 h-5 text-brand-400 group-hover:scale-110 transition-transform"></i>
@@ -1263,6 +1276,48 @@
                     </div>
                 </div>
 
+                <!-- EXPEDIENTE Y RELACIÓN FICHA / INSTRUCTORES -->
+                <div class="grid grid-cols-1 xl:grid-cols-3 gap-5">
+                    <div class="xl:col-span-2 bg-[#181332] border border-purple-900/30 p-5 rounded-2xl glow-card">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+                            <div>
+                                <h2 class="text-base font-bold text-white flex items-center gap-2">
+                                    <i data-lucide="folder-open" class="w-5 h-5 text-brand-400"></i>
+                                    Expediente del Aprendiz
+                                </h2>
+                                <p class="text-[11px] text-purple-400 mt-1">Consulta la información académica, fichas asignadas e instructores responsables.</p>
+                            </div>
+                            <button onclick="abrirExpedienteSeleccionado()" class="px-3.5 py-2 rounded-xl text-xs font-bold text-white bg-gradient-to-r from-brand-600 to-brand-500 hover:from-brand-500 hover:to-brand-400 flex items-center gap-2">
+                                <i data-lucide="search" class="w-4 h-4"></i> Abrir expediente
+                            </button>
+                        </div>
+                        <div id="expediente-resumen" class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                            <div class="rounded-xl bg-purple-950/40 border border-purple-900/40 p-4">
+                                <span class="text-[10px] uppercase tracking-wider text-purple-400">Aprendiz</span>
+                                <p class="text-sm font-bold text-white mt-1">Seleccione un aprendiz</p>
+                            </div>
+                            <div class="rounded-xl bg-purple-950/40 border border-purple-900/40 p-4">
+                                <span class="text-[10px] uppercase tracking-wider text-purple-400">Fichas</span>
+                                <p class="text-sm font-bold text-brand-300 mt-1">0 asignadas</p>
+                            </div>
+                            <div class="rounded-xl bg-purple-950/40 border border-purple-900/40 p-4">
+                                <span class="text-[10px] uppercase tracking-wider text-purple-400">Instructores</span>
+                                <p class="text-sm font-bold text-purple-200 mt-1">Seleccione una ficha</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-[#181332] border border-purple-900/30 p-5 rounded-2xl glow-card">
+                        <div class="flex items-center gap-2 mb-3">
+                            <i data-lucide="graduation-cap" class="w-5 h-5 text-brand-400"></i>
+                            <h3 class="text-sm font-bold text-white">Ficha seleccionada</h3>
+                        </div>
+                        <div id="ficha-seleccionada-resumen" class="text-xs text-purple-300">
+                            Seleccione "Abrir expediente" en un aprendiz para consultar sus fichas.
+                        </div>
+                    </div>
+                </div>
+
                 <div class="bg-[#181332] border border-purple-900/30 p-4 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-4 glow-card">
                     <div class="relative w-full md:w-80">
                         <i data-lucide="search" class="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-purple-400"></i>
@@ -1313,6 +1368,86 @@
         </div>
     </main>
 
+    <!-- MODAL: EXPEDIENTE COMPLETO DEL APRENDIZ -->
+    <div id="modal-expediente-aprendiz" class="fixed inset-0 bg-black/75 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-[#101817] border border-green-800/50 rounded-2xl w-full max-w-5xl max-h-[92vh] overflow-y-auto shadow-2xl">
+            <div class="px-6 py-5 border-b border-green-900/40 flex items-center justify-between sticky top-0 bg-[#101817] z-10">
+                <div>
+                    <p class="text-[10px] uppercase tracking-[.2em] text-green-400 font-bold">Expediente académico</p>
+                    <h3 id="expediente-title" class="text-xl font-bold text-white mt-1">Aprendiz</h3>
+                    <p id="expediente-subtitle" class="text-xs text-slate-400 mt-1"></p>
+                </div>
+                <button onclick="cerrarExpediente()" class="p-2 rounded-xl text-slate-400 hover:text-white hover:bg-green-900/30">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+            <div class="p-6 space-y-5">
+                <div id="expediente-datos" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3"></div>
+
+                <div class="bg-[#17221F] border border-green-900/30 rounded-2xl p-5">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+                        <div>
+                            <h4 class="text-sm font-bold text-white flex items-center gap-2">
+                                <i data-lucide="layers-3" class="w-4 h-4 text-green-400"></i>
+                                Fichas asignadas al aprendiz
+                            </h4>
+                            <p class="text-[10px] text-slate-400 mt-1">El aprendiz puede tener una o varias fichas asociadas.</p>
+                        </div>
+                        <button onclick="abrirAsignarFicha()" class="px-3.5 py-2 rounded-xl text-xs font-bold bg-[#39A900] hover:bg-[#007832] text-white flex items-center gap-2">
+                            <i data-lucide="plus" class="w-4 h-4"></i> Asignar ficha
+                        </button>
+                    </div>
+                    <div id="expediente-fichas" class="grid grid-cols-1 md:grid-cols-2 gap-3"></div>
+                </div>
+
+                <div class="bg-[#17221F] border border-green-900/30 rounded-2xl p-5">
+                    <div class="flex items-center justify-between gap-3 mb-4">
+                        <div>
+                            <h4 class="text-sm font-bold text-white flex items-center gap-2">
+                                <i data-lucide="users-round" class="w-4 h-4 text-green-400"></i>
+                                Instructores de la ficha
+                            </h4>
+                            <p id="expediente-ficha-instructores-label" class="text-[10px] text-slate-400 mt-1">Seleccione una ficha.</p>
+                        </div>
+                    </div>
+                    <div id="expediente-instructores" class="grid grid-cols-1 md:grid-cols-2 gap-3"></div>
+                </div>
+
+                <div class="flex justify-end">
+                    <button onclick="cerrarExpediente()" class="px-4 py-2 rounded-xl text-xs text-slate-300 border border-slate-700 hover:bg-slate-800">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: ASIGNAR FICHA AL APRENDIZ -->
+    <div id="modal-asignar-ficha-aprendiz" class="fixed inset-0 bg-black/75 backdrop-blur-sm z-[60] hidden flex items-center justify-center p-4">
+        <div class="bg-[#101817] border border-green-800/50 rounded-2xl w-full max-w-lg overflow-hidden shadow-2xl">
+            <div class="px-6 py-5 border-b border-green-900/40 flex items-center justify-between">
+                <div>
+                    <h3 class="text-base font-bold text-white flex items-center gap-2">
+                        <i data-lucide="plus-circle" class="w-5 h-5 text-green-400"></i> Asignar ficha
+                    </h3>
+                    <p id="asignar-ficha-aprendiz-nombre" class="text-[11px] text-slate-400 mt-1"></p>
+                </div>
+                <button onclick="cerrarAsignarFicha()" class="p-2 rounded-xl text-slate-400 hover:text-white">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+            <form onsubmit="guardarFichaAprendiz(event)" class="p-6 space-y-4">
+                <div>
+                    <label class="block text-xs font-medium text-slate-300 mb-1">Ficha de formación</label>
+                    <select id="select-ficha-aprendiz" required class="w-full bg-[#17221F] border border-green-900/40 rounded-xl px-3 py-2.5 text-xs text-white"></select>
+                </div>
+                <div id="preview-ficha-aprendiz" class="rounded-xl bg-green-950/20 border border-green-900/30 p-4 text-xs text-slate-300"></div>
+                <div class="flex justify-end gap-2">
+                    <button type="button" onclick="cerrarAsignarFicha()" class="px-4 py-2 rounded-xl text-xs text-slate-300 border border-slate-700">Cancelar</button>
+                    <button type="submit" class="px-4 py-2 rounded-xl text-xs font-bold bg-[#39A900] hover:bg-[#007832] text-white">Asignar ficha</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <!-- MODAL: GESTIONAR FALLA Y EXCUSA -->
     <div id="modal-excusa" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
         <div class="bg-[#101817] border border-green-800/50 rounded-2xl w-full max-w-lg overflow-hidden shadow-2xl">
@@ -1331,7 +1466,14 @@
     </div>
 
     <!-- MODAL 1: REGISTRAR / EDITAR APRENDIZ -->
-    <div id="modal-aprendiz" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <!-- VISTAS DE TRANSVERSALES E INSTRUCTORES -->
+<section id="view-transversales" class="hidden space-y-6">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4"><div><h1 class="text-2xl font-bold text-white">Transversales de Aprendices</h1><p class="text-xs text-purple-400 mt-1">Asignación general al aprendiz, independiente de la ficha.</p></div><button onclick="abrirAsignarTransversal()" class="bg-gradient-to-r from-brand-600 to-brand-500 text-white px-4 py-2.5 rounded-xl text-sm flex items-center gap-2"><i data-lucide="plus" class="w-4 h-4"></i>Asignar transversal</button></div>
+<div class="bg-[#101817] border border-purple-900/30 rounded-2xl overflow-hidden"><div class="p-5 border-b border-purple-900/30"><h2 class="font-bold text-white">Asignaciones generales</h2><p class="text-xs text-purple-400 mt-1">Aquí se ve qué instructor dicta cada transversal, cuántas horas debe ver el aprendiz y en qué horario.</p></div><div class="overflow-x-auto"><table class="w-full text-left"><thead class="bg-purple-950/40 text-[10px] uppercase text-purple-400"><tr><th class="p-4">Aprendiz</th><th class="p-4">Transversal</th><th class="p-4">Instructor</th><th class="p-4">Horas</th><th class="p-4">Horario</th></tr></thead><tbody id="transversales-tbody"></tbody></table></div></div></section>
+<section id="view-instructor-fichas" class="hidden space-y-6"><div><h1 class="text-2xl font-bold text-white">Fichas asignadas al Instructor</h1><p class="text-xs text-purple-400 mt-1">Vista independiente para consultar las fichas que el instructor tiene asignadas para dar transversales o gestionar.</p></div><div class="bg-[#101817] border border-purple-900/30 rounded-2xl p-5 flex items-center gap-4"><span class="text-sm text-purple-300">Instructor:</span><select id="instructor-ficha-select" onchange="renderFichasInstructor()" class="bg-purple-950 border border-purple-800 text-white rounded-xl px-4 py-2.5 text-sm"><option>Valeria Gómez</option><option>Carlos Pérez</option><option>Laura Méndez</option><option>Jorge Ramírez</option><option>Andrés Martínez</option></select></div><div id="fichas-instructor-grid" class="grid grid-cols-1 md:grid-cols-2 gap-5"></div></section>
+<section id="view-jefatura-ficha" class="hidden space-y-6"><div><h1 class="text-2xl font-bold text-white">Jefe de Ficha</h1><p class="text-xs text-purple-400 mt-1">Aquí aparecen las fichas que fueron asignadas al jefe de ficha para que tenga a cargo sus aprendices.</p></div><div class="bg-[#101817] border border-purple-900/30 rounded-2xl p-5 flex items-center gap-4"><span class="text-sm text-purple-300">Jefe de ficha:</span><select id="jefe-ficha-select" onchange="renderJefaturaFicha()" class="bg-purple-950 border border-purple-800 text-white rounded-xl px-4 py-2.5 text-sm"><option>Andrés Martínez</option><option>Laura Méndez</option><option>Jorge Ramírez</option></select></div><div id="jefatura-ficha-grid" class="grid grid-cols-1 md:grid-cols-2 gap-5"></div></section>
+
+<div id="modal-aprendiz" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
         <div class="bg-[#181332] border border-purple-800/50 rounded-2xl w-full max-w-2xl overflow-hidden shadow-2xl glow-purple transform transition-all scale-95 opacity-0 duration-200" id="modal-container">
             <div class="px-6 py-4 border-b border-purple-900/40 flex items-center justify-between bg-purple-950/40">
                 <h3 class="text-base font-bold text-white flex items-center gap-2" id="modal-title">
@@ -1452,12 +1594,59 @@
     <script>
         // Data Structures for System
         let aprendicesData = [
-            { id: 1, fallas: 1, nombre: "Juan Sebastian Silva", doc: "101829381", email: "juan.silva@sena.edu.co", ficha: "284910 - ADSO", estado: "Activo", asistencia: 96, promedio: 4.8 },
-            { id: 2, fallas: 3, nombre: "Maria Camila Torres", doc: "102938471", email: "mc.torres@sena.edu.co", ficha: "284910 - ADSO", estado: "En Riesgo", asistencia: 74, promedio: 3.1 },
-            { id: 3, fallas: 1, nombre: "Andrés Felipe Ruiz", doc: "109837128", email: "af.ruiz@sena.edu.co", ficha: "271029 - Ciberseguridad", estado: "Activo", asistencia: 92, promedio: 4.5 },
-            { id: 4, fallas: 0, nombre: "Laura Sofia Restrepo", doc: "103291823", email: "ls.restrepo@sena.edu.co", ficha: "291024 - Redes Cisco", estado: "Activo", asistencia: 98, promedio: 4.9 },
-            { id: 5, fallas: 5, nombre: "Diego Alejandro Patiño", doc: "108726351", email: "da.patino@sena.edu.co", ficha: "284910 - ADSO", estado: "Inactivo", asistencia: 50, promedio: 2.5 }
+            { id: 1, fallas: 1, nombre: "Juan Sebastian Silva", doc: "101829381", email: "juan.silva@sena.edu.co", ficha: "284910 - ADSO", assignedFichas: ["284910 - ADSO"], transversales: [{nombre:"Inglés", instructor:"Valeria Gómez", horas:48, horario:"Lunes y miércoles · 2:00 PM - 4:00 PM"}, {nombre:"Ética y Valores", instructor:"Carlos Pérez", horas:32, horario:"Viernes · 8:00 AM - 10:00 AM"}], estado: "Activo", asistencia: 96, promedio: 4.8 },
+            { id: 2, fallas: 3, nombre: "Maria Camila Torres", doc: "102938471", email: "mc.torres@sena.edu.co", ficha: "284910 - ADSO", assignedFichas: ["284910 - ADSO"], transversales: [{nombre:"Inglés", instructor:"Valeria Gómez", horas:48, horario:"Lunes y miércoles · 2:00 PM - 4:00 PM"}, {nombre:"Ética y Valores", instructor:"Carlos Pérez", horas:32, horario:"Viernes · 8:00 AM - 10:00 AM"}], estado: "En Riesgo", asistencia: 74, promedio: 3.1 },
+            { id: 3, fallas: 1, nombre: "Andrés Felipe Ruiz", doc: "109837128", email: "af.ruiz@sena.edu.co", ficha: "271029 - Ciberseguridad", assignedFichas: ["271029 - Ciberseguridad"], transversales: [{nombre:"Inglés", instructor:"Valeria Gómez", horas:48, horario:"Martes y jueves · 6:00 PM - 8:00 PM"}], estado: "Activo", asistencia: 92, promedio: 4.5 },
+            { id: 4, fallas: 0, nombre: "Laura Sofia Restrepo", doc: "103291823", email: "laura.restrepo@sena.edu.co", ficha: "291024 - Redes Cisco", assignedFichas: ["291024 - Redes Cisco"], transversales: [{nombre:"Comunicación", instructor:"Laura Méndez", horas:40, horario:"Miércoles · 8:00 AM - 12:00 PM"}], estado: "Activo", asistencia: 98, promedio: 4.9 },
+            { id: 5, fallas: 5, nombre: "Diego Alejandro Patiño", doc: "108726351", email: "da.patino@sena.edu.co", ficha: "284910 - ADSO", assignedFichas: ["284910 - ADSO"], transversales: [{nombre:"Inglés", instructor:"Valeria Gómez", horas:48, horario:"Lunes y miércoles · 2:00 PM - 4:00 PM"}, {nombre:"Ética y Valores", instructor:"Carlos Pérez", horas:32, horario:"Viernes · 8:00 AM - 10:00 AM"}], estado: "Inactivo", asistencia: 50, promedio: 2.5 }
         ];
+
+        // Fichas disponibles para asignar a cada aprendiz.
+        let fichasAprendizData = [
+            { id: "FIC-284910", codigo: "284910", nombre: "284910 - ADSO", programa: "Análisis y Desarrollo de Software", jornada: "Diurna", estado: "Activa" },
+            { id: "FIC-271029", codigo: "271029", nombre: "271029 - Ciberseguridad", programa: "Ciberseguridad", jornada: "Nocturna", estado: "Activa" },
+            { id: "FIC-291024", codigo: "291024", nombre: "291024 - Redes Cisco", programa: "Redes y Telecomunicaciones", jornada: "Diurna", estado: "Activa" }
+        ];
+
+        // Instructores relacionados con cada ficha.
+        let instructoresPorFicha = {
+            "284910": [
+                { id: "INS-01", nombre: "Valeria Gómez", rol: "Instructora Líder", area: "Desarrollo de Software", email: "valeria.gomez@sena.edu.co" },
+                { id: "INS-02", nombre: "Carlos Pérez", rol: "Instructor Técnico", area: "Bases de Datos", email: "carlos.perez@sena.edu.co" }
+            ],
+            "271029": [
+                { id: "INS-03", nombre: "Andrés Martínez", rol: "Instructor Líder", area: "Ciberseguridad", email: "andres.martinez@sena.edu.co" },
+                { id: "INS-04", nombre: "Laura Méndez", rol: "Instructor Técnico", area: "Redes y Seguridad", email: "laura.mendez@sena.edu.co" }
+            ],
+            "291024": [
+                { id: "INS-05", nombre: "Jorge Ramírez", rol: "Instructor Líder", area: "Redes Cisco", email: "jorge.ramirez@sena.edu.co" }
+            ]
+        };
+
+        // TRANSVERSALES: asignación general al aprendiz, independiente de la ficha.
+        let transversalesData = [
+          { id:"TR-01", nombre:"Inglés", instructor:"Valeria Gómez", horas:48, horario:"Lunes y miércoles · 2:00 PM - 4:00 PM", modalidad:"Presencial" },
+          { id:"TR-02", nombre:"Ética y Valores", instructor:"Carlos Pérez", horas:32, horario:"Viernes · 8:00 AM - 10:00 AM", modalidad:"Presencial" },
+          { id:"TR-03", nombre:"Comunicación", instructor:"Laura Méndez", horas:40, horario:"Miércoles · 8:00 AM - 12:00 PM", modalidad:"Presencial" },
+          { id:"TR-04", nombre:"Emprendimiento", instructor:"Jorge Ramírez", horas:36, horario:"Jueves · 2:00 PM - 5:00 PM", modalidad:"Virtual" }
+        ];
+
+        // Fichas que cada instructor tiene asignadas para impartir transversales o gestionar.
+        let fichasInstructorData = [
+          { instructor:"Valeria Gómez", tipo:"Transversal", ficha:"284910 - ADSO", transversal:"Inglés", horas:48, horario:"Lunes y miércoles · 2:00 PM - 4:00 PM" },
+          { instructor:"Valeria Gómez", tipo:"Transversal", ficha:"271029 - Ciberseguridad", transversal:"Inglés", horas:48, horario:"Martes y jueves · 6:00 PM - 8:00 PM" },
+          { instructor:"Carlos Pérez", tipo:"Transversal", ficha:"284910 - ADSO", transversal:"Ética y Valores", horas:32, horario:"Viernes · 8:00 AM - 10:00 AM" },
+          { instructor:"Laura Méndez", tipo:"Transversal", ficha:"291024 - Redes Cisco", transversal:"Comunicación", horas:40, horario:"Miércoles · 8:00 AM - 12:00 PM" }
+        ];
+
+        // Jefes de ficha y las fichas que tienen bajo su responsabilidad.
+        let jefesFichaData = [
+          { jefe:"Andrés Martínez", ficha:"284910 - ADSO", programa:"Análisis y Desarrollo de Software", jornada:"Diurna", aprendices:32 },
+          { jefe:"Laura Méndez", ficha:"271029 - Ciberseguridad", programa:"Ciberseguridad", jornada:"Nocturna", aprendices:28 },
+          { jefe:"Jorge Ramírez", ficha:"291024 - Redes Cisco", programa:"Redes y Telecomunicaciones", jornada:"Diurna", aprendices:25 }
+        ];
+
+        let aprendizExpedienteActual = null;
 
         let inventarioAmbientesData = {
             "Aula 102 ADSO": [
@@ -1599,7 +1788,7 @@
         }
 
         function switchView(viewName) {
-            const views = ['dashboard', 'ambientes', 'marcaciones', 'notas', 'eventos', 'notificaciones', 'aprendices'];
+            const views = ['dashboard', 'ambientes', 'marcaciones', 'notas', 'eventos', 'notificaciones', 'aprendices', 'transversales', 'instructor-fichas', 'jefatura-ficha'];
             views.forEach(v => {
                 const el = document.getElementById(`view-${v}`);
                 if (el) el.classList.add('hidden');
@@ -1612,6 +1801,31 @@
             const activeNavItem = document.getElementById(`nav-${viewName}`);
             if (activeNavItem) activeNavItem.classList.add('bg-brand-600/20', 'text-white');
         }
+
+        function renderTransversales() {
+          const tbody=document.getElementById('transversales-tbody'); if(!tbody) return; tbody.innerHTML='';
+          aprendicesData.forEach(a=>(a.transversales||[]).forEach(t=>{ tbody.innerHTML+=`<tr class="border-t border-purple-900/20 hover:bg-purple-900/20"><td class="p-4"><div class="font-semibold text-white">${a.nombre}</div><div class="text-[10px] text-purple-400">${a.doc}</div></td><td class="p-4 text-emerald-300 font-semibold">${t.nombre}</td><td class="p-4 text-white">${t.instructor}</td><td class="p-4 text-white">${t.horas} h</td><td class="p-4 text-purple-300">${t.horario}</td></tr>`;}));
+        }
+        function renderFichasInstructor(){
+          const instructor=document.getElementById('instructor-ficha-select')?.value; const box=document.getElementById('fichas-instructor-grid'); if(!box)return;
+          const items=fichasInstructorData.filter(x=>x.instructor===instructor); box.innerHTML=items.length?items.map(x=>`<div class="bg-[#101817] border border-purple-900/30 rounded-2xl p-5 glow-card"><div class="flex justify-between gap-3"><div><p class="text-[10px] text-purple-400 uppercase font-bold">${x.tipo}</p><h3 class="text-lg font-bold text-white mt-1">${x.ficha}</h3></div><span class="px-2 py-1 rounded-lg bg-emerald-500/15 text-emerald-300 text-[10px]">Asignada</span></div><p class="text-sm text-purple-200 mt-4">Transversal: <b class="text-white">${x.transversal}</b></p><div class="grid grid-cols-2 gap-3 mt-4"><div class="bg-purple-950/40 rounded-xl p-3"><span class="text-[10px] text-purple-400">Horas</span><p class="font-bold text-white">${x.horas} h</p></div><div class="bg-purple-950/40 rounded-xl p-3"><span class="text-[10px] text-purple-400">Horario</span><p class="font-semibold text-white text-xs">${x.horario}</p></div></div><button onclick="verAprendicesFichaInstructor('${encodeURIComponent(x.ficha)}')" class="mt-4 w-full border border-purple-700/40 hover:bg-purple-900/30 rounded-xl py-2 text-xs text-purple-200">Ver aprendices de la ficha</button></div>`).join(''):`<div class="col-span-full bg-[#101817] border border-dashed border-purple-800/50 rounded-2xl p-8 text-center text-purple-400">Este instructor no tiene fichas asignadas actualmente.</div>`;
+        }
+        function renderJefaturaFicha(){
+          const jefe=document.getElementById('jefe-ficha-select')?.value; const box=document.getElementById('jefatura-ficha-grid'); if(!box)return;
+          const items=jefesFichaData.filter(x=>x.jefe===jefe); box.innerHTML=items.map(x=>{const aprendices=aprendicesData.filter(a=>(a.assignedFichas||[]).includes(x.ficha)); return `<div class="bg-[#101817] border border-purple-900/30 rounded-2xl p-5 glow-card"><p class="text-[10px] text-emerald-400 uppercase font-bold">Jefe de ficha</p><h3 class="text-xl font-bold text-white mt-1">${x.ficha}</h3><p class="text-sm text-purple-300 mt-1">${x.programa} · ${x.jornada}</p><div class="grid grid-cols-2 gap-3 mt-5"><div class="bg-purple-950/40 rounded-xl p-3"><span class="text-[10px] text-purple-400">Aprendices registrados</span><p class="text-2xl font-bold text-white">${x.aprendices}</p></div><div class="bg-purple-950/40 rounded-xl p-3"><span class="text-[10px] text-purple-400">En esta vista</span><p class="text-2xl font-bold text-white">${aprendices.length}</p></div></div><div class="mt-5 space-y-2">${aprendices.map(a=>`<div class="flex items-center justify-between bg-purple-950/30 rounded-xl p-3"><span class="text-sm text-white">${a.nombre}</span><button onclick="abrirExpedienteAprendiz(${a.id})" class="text-xs text-emerald-300 hover:text-white">Expediente</button></div>`).join('')||'<p class="text-xs text-purple-500">No hay aprendices cargados para esta ficha.</p>'}</div></div>`}).join('')||'<div class="col-span-full text-purple-400">No hay fichas asignadas a este jefe.</div>';
+        }
+        function verAprendicesFichaInstructor(enc){ const ficha=decodeURIComponent(enc); const items=aprendicesData.filter(a=>(a.assignedFichas||[]).includes(ficha)); Swal.fire({title:'Aprendices de la ficha',html:items.map(a=>`<div style="text-align:left;padding:8px;border-bottom:1px solid #333">${a.nombre}<br><small>${a.doc} · ${a.email}</small></div>`).join('')||'Sin aprendices registrados',confirmButtonText:'Cerrar'}); }
+        function abrirAsignarTransversal(){
+          const options=transversalesData.map(t=>`<option value="${t.id}">${t.nombre} — ${t.instructor} — ${t.horas} h</option>`).join('');
+          const aps=aprendicesData.map(a=>`<option value="${a.id}">${a.nombre} — ${a.doc}</option>`).join('');
+          Swal.fire({title:'Asignar transversal al aprendiz',html:`<select id="swal-ap" class="swal2-input">${aps}</select><select id="swal-tr" class="swal2-input">${options}</select><p style="font-size:12px;text-align:left;color:#aaa">El instructor, horas y horario vienen definidos por el transversal.</p>`,showCancelButton:true,confirmButtonText:'Asignar',cancelButtonText:'Cancelar',preConfirm:()=>{const a=aprendicesData.find(x=>x.id==document.getElementById('swal-ap').value);const t=transversalesData.find(x=>x.id===document.getElementById('swal-tr').value);a.transversales=a.transversales||[]; if(!a.transversales.some(x=>x.nombre===t.nombre)){a.transversales.push({...t});} return true;}}).then(r=>{if(r.isConfirmed){renderTransversales(); if(aprendizExpedienteActual) renderExpedienteAprendiz(aprendizExpedienteActual); Swal.fire({icon:'success',title:'Transversal asignado',timer:1200,showConfirmButton:false});}});
+        }
+
+function renderTransversales(){const tb=document.getElementById('transversales-tbody');if(!tb)return;tb.innerHTML='';aprendicesData.forEach(a=>(a.transversales||[]).forEach(t=>tb.innerHTML+=`<tr class="border-t border-purple-900/20 hover:bg-purple-900/20"><td class="p-4"><b class="text-white">${a.nombre}</b><div class="text-[10px] text-purple-400">${a.doc}</div></td><td class="p-4 text-emerald-300 font-semibold">${t.nombre}</td><td class="p-4 text-white">${t.instructor}</td><td class="p-4 text-white">${t.horas} h</td><td class="p-4 text-purple-300">${t.horario}</td></tr>`));}
+function renderFichasInstructor(){const ins=document.getElementById('instructor-ficha-select')?.value,box=document.getElementById('fichas-instructor-grid');if(!box)return;const arr=fichasInstructorData.filter(x=>x.instructor===ins);box.innerHTML=arr.map(x=>`<div class="bg-[#101817] border border-purple-900/30 rounded-2xl p-5"><div class="flex justify-between"><div><p class="text-[10px] text-purple-400 uppercase">${x.tipo}</p><h3 class="text-lg font-bold text-white">${x.ficha}</h3></div><span class="text-xs text-emerald-300">Asignada</span></div><p class="text-sm text-purple-200 mt-4">Transversal: <b class="text-white">${x.transversal}</b></p><div class="grid grid-cols-2 gap-3 mt-4"><div class="bg-purple-950/40 rounded-xl p-3"><span class="text-[10px] text-purple-400">Horas</span><p class="font-bold text-white">${x.horas} h</p></div><div class="bg-purple-950/40 rounded-xl p-3"><span class="text-[10px] text-purple-400">Horario</span><p class="font-semibold text-white text-xs">${x.horario}</p></div></div><button onclick="verAprendicesFichaInstructor('${encodeURIComponent(x.ficha)}')" class="mt-4 w-full border border-purple-700/40 rounded-xl py-2 text-xs text-purple-200">Ver aprendices de la ficha</button></div>`).join('')||'<div class="col-span-full bg-[#101817] border border-dashed border-purple-800/50 rounded-2xl p-8 text-center text-purple-400">Este instructor no tiene fichas asignadas.</div>'; }
+function renderJefaturaFicha(){const jefe=document.getElementById('jefe-ficha-select')?.value,box=document.getElementById('jefatura-ficha-grid');if(!box)return;const arr=jefesFichaData.filter(x=>x.jefe===jefe);box.innerHTML=arr.map(x=>{const aps=aprendicesData.filter(a=>(a.assignedFichas||[]).includes(x.ficha));return `<div class="bg-[#101817] border border-purple-900/30 rounded-2xl p-5"><p class="text-[10px] text-emerald-400 uppercase">Ficha a cargo</p><h3 class="text-xl font-bold text-white">${x.ficha}</h3><p class="text-sm text-purple-300 mt-1">${x.programa} · ${x.jornada}</p><div class="grid grid-cols-2 gap-3 mt-5"><div class="bg-purple-950/40 rounded-xl p-3"><span class="text-[10px] text-purple-400">Aprendices</span><p class="text-2xl font-bold text-white">${x.aprendices}</p></div><div class="bg-purple-950/40 rounded-xl p-3"><span class="text-[10px] text-purple-400">Cargados aquí</span><p class="text-2xl font-bold text-white">${aps.length}</p></div></div><div class="mt-5 space-y-2">${aps.map(a=>`<div class="flex items-center justify-between bg-purple-950/30 rounded-xl p-3"><span class="text-sm text-white">${a.nombre}</span><button onclick="abrirExpedienteAprendiz(${a.id})" class="text-xs text-emerald-300">Expediente</button></div>`).join('')||'<p class="text-xs text-purple-500">No hay aprendices cargados.</p>'}</div></div>`}).join('')||'<div class="col-span-full text-purple-400">No hay fichas asignadas.</div>'; }
+function verAprendicesFichaInstructor(enc){const ficha=decodeURIComponent(enc),aps=aprendicesData.filter(a=>(a.assignedFichas||[]).includes(ficha));Swal.fire({title:'Aprendices de la ficha',html:aps.map(a=>`<div style="text-align:left;padding:8px;border-bottom:1px solid #333">${a.nombre}<br><small>${a.doc}</small></div>`).join('')||'Sin aprendices',confirmButtonText:'Cerrar'});}
+function abrirAsignarTransversal(){const aps=aprendicesData.map(a=>`<option value="${a.id}">${a.nombre} — ${a.doc}</option>`).join(''),trs=transversalesData.map(t=>`<option value="${t.id}">${t.nombre} — ${t.instructor} — ${t.horas} h</option>`).join('');Swal.fire({title:'Asignar transversal al aprendiz',html:`<select id="swal-ap" class="swal2-input">${aps}</select><select id="swal-tr" class="swal2-input">${trs}</select>`,showCancelButton:true,confirmButtonText:'Asignar',cancelButtonText:'Cancelar',preConfirm:()=>{const a=aprendicesData.find(x=>x.id==document.getElementById('swal-ap').value),t=transversalesData.find(x=>x.id===document.getElementById('swal-tr').value);a.transversales=a.transversales||[];if(!a.transversales.some(x=>x.nombre===t.nombre))a.transversales.push({...t});}}).then(r=>{if(r.isConfirmed){renderTransversales();if(aprendizExpedienteActual)renderExpedienteAprendiz(aprendizExpedienteActual);Swal.fire({icon:'success',title:'Transversal asignado',timer:1200,showConfirmButton:false});}});}
 
         // AMBIENTES HANDOVER MODULE LOGIC
         function cargarInventarioAmbiente() {
@@ -1965,6 +2179,9 @@ function renderAprendicesTable() {
                         <td class="p-4 font-bold text-white">${item.promedio}</td>
                         <td class="p-4 text-center">
                             <div class="flex items-center justify-center gap-1">
+                                <button onclick="abrirExpedienteAprendiz(${item.id})" title="Ver expediente" class="p-1.5 rounded-lg hover:bg-emerald-500/20 text-emerald-300 hover:text-white">
+                                    <i data-lucide="folder-open" class="w-4 h-4"></i>
+                                </button>
                                 <button onclick="openEditModal(${item.id})" title="Editar" class="p-1.5 rounded-lg hover:bg-purple-800/40 text-purple-300 hover:text-white">
                                     <i data-lucide="edit-3" class="w-4 h-4"></i>
                                 </button>
@@ -1983,6 +2200,210 @@ function renderAprendicesTable() {
 
             document.getElementById('table-count-info').textContent = `Mostrando ${filtered.length} de ${aprendicesData.length} aprendices`;
             lucide.createIcons();
+        }
+
+        function normalizarFichasAprendiz(aprendiz) {
+            if (!aprendiz.assignedFichas || !Array.isArray(aprendiz.assignedFichas)) {
+                aprendiz.assignedFichas = aprendiz.ficha ? [aprendiz.ficha] : [];
+            }
+            return aprendiz.assignedFichas;
+        }
+
+        function obtenerFichaData(nombreFicha) {
+            return fichasAprendizData.find(f => f.nombre === nombreFicha || nombreFicha.startsWith(f.codigo)) || null;
+        }
+
+        function obtenerInstructoresFicha(nombreFicha) {
+            const ficha = obtenerFichaData(nombreFicha);
+            return ficha ? (instructoresPorFicha[ficha.codigo] || []) : [];
+        }
+
+        function abrirExpedienteSeleccionado() {
+            if (aprendizExpedienteActual) {
+                abrirExpedienteAprendiz(aprendizExpedienteActual);
+                return;
+            }
+            const primero = aprendicesData[0];
+            if (primero) abrirExpedienteAprendiz(primero.id);
+        }
+
+        function abrirExpedienteAprendiz(id) {
+            const aprendiz = aprendicesData.find(a => a.id === id);
+            if (!aprendiz) return;
+            aprendizExpedienteActual = id;
+            normalizarFichasAprendiz(aprendiz);
+
+            document.getElementById('expediente-title').textContent = aprendiz.nombre;
+            document.getElementById('expediente-subtitle').textContent = `${aprendiz.doc} · ${aprendiz.email}`;
+            document.getElementById('modal-expediente-aprendiz').classList.remove('hidden');
+
+            renderExpedienteAprendiz(aprendiz);
+            lucide.createIcons();
+        }
+
+        function renderExpedienteAprendiz(aprendiz) {
+            const transBox=document.getElementById('expediente-transversales'); if(transBox){ transBox.innerHTML=(aprendiz.transversales||[]).map(t=>`<div class="bg-purple-950/30 border border-purple-800/30 rounded-xl p-4"><div class="font-bold text-white">${t.nombre}</div><div class="text-xs text-emerald-300 mt-1">Instructor: ${t.instructor}</div><div class="text-xs text-purple-300 mt-2">${t.horas} horas · ${t.horario}</div></div>`).join('') || '<p class="text-xs text-purple-500">No tiene transversales asignados.</p>'; }
+            const fichas = normalizarFichasAprendiz(aprendiz);
+            const estadoClass = aprendiz.estado === 'Activo'
+                ? 'text-emerald-300 bg-emerald-500/10 border-emerald-500/30'
+                : aprendiz.estado === 'En Riesgo'
+                    ? 'text-amber-300 bg-amber-500/10 border-amber-500/30'
+                    : 'text-rose-300 bg-rose-500/10 border-rose-500/30';
+
+            document.getElementById('expediente-datos').innerHTML = `
+                <div class="rounded-xl bg-[#17221F] border border-green-900/30 p-4">
+                    <span class="text-[10px] uppercase text-slate-500">Documento</span>
+                    <p class="text-sm font-bold text-white mt-1">${aprendiz.doc}</p>
+                </div>
+                <div class="rounded-xl bg-[#17221F] border border-green-900/30 p-4">
+                    <span class="text-[10px] uppercase text-slate-500">Estado</span>
+                    <p class="mt-1"><span class="inline-flex px-2 py-1 rounded-full border text-[10px] font-bold ${estadoClass}">${aprendiz.estado}</span></p>
+                </div>
+                <div class="rounded-xl bg-[#17221F] border border-green-900/30 p-4">
+                    <span class="text-[10px] uppercase text-slate-500">Asistencia</span>
+                    <p class="text-sm font-bold text-emerald-300 mt-1">${aprendiz.asistencia}%</p>
+                </div>
+                <div class="rounded-xl bg-[#17221F] border border-green-900/30 p-4">
+                    <span class="text-[10px] uppercase text-slate-500">Promedio</span>
+                    <p class="text-sm font-bold text-white mt-1">${aprendiz.promedio}</p>
+                </div>
+            `;
+
+            document.getElementById('expediente-fichas').innerHTML = fichas.length
+                ? fichas.map((nombre, index) => {
+                    const ficha = obtenerFichaData(nombre);
+                    return `
+                        <div class="rounded-xl border border-green-900/30 bg-[#101817] p-4">
+                            <div class="flex items-start justify-between gap-3">
+                                <div>
+                                    <p class="text-sm font-bold text-white">${ficha ? ficha.nombre : nombre}</p>
+                                    <p class="text-[10px] text-slate-400 mt-1">${ficha ? ficha.programa : 'Ficha de formación'}</p>
+                                </div>
+                                <span class="px-2 py-1 rounded-full text-[9px] font-bold bg-green-500/10 text-green-300 border border-green-500/20">Asignada</span>
+                            </div>
+                            ${ficha ? `<div class="flex flex-wrap gap-2 mt-3">
+                                <span class="px-2 py-1 rounded-lg bg-slate-800 text-[9px] text-slate-300">${ficha.jornada}</span>
+                                <span class="px-2 py-1 rounded-lg bg-slate-800 text-[9px] text-slate-300">${ficha.estado}</span>
+                            </div>` : ''}
+                            <button onclick="verInstructoresFicha('${encodeURIComponent(nombre)}')" class="mt-3 w-full py-2 rounded-lg text-[10px] font-bold text-green-300 border border-green-800/50 hover:bg-green-900/20">
+                                Ver instructores de esta ficha
+                            </button>
+                        </div>
+                    `;
+                }).join('')
+                : `<div class="rounded-xl border border-dashed border-green-900/40 p-5 text-center text-xs text-slate-500 md:col-span-2">Este aprendiz todavía no tiene fichas asignadas.</div>`;
+
+            actualizarInstructoresExpediente(fichas[0] || null);
+
+            const resumen = document.getElementById('expediente-resumen');
+            if (resumen) {
+                resumen.innerHTML = `
+                    <div class="rounded-xl bg-purple-950/40 border border-purple-900/40 p-4">
+                        <span class="text-[10px] uppercase tracking-wider text-purple-400">Aprendiz</span>
+                        <p class="text-sm font-bold text-white mt-1">${aprendiz.nombre}</p>
+                    </div>
+                    <div class="rounded-xl bg-purple-950/40 border border-purple-900/40 p-4">
+                        <span class="text-[10px] uppercase tracking-wider text-purple-400">Fichas</span>
+                        <p class="text-sm font-bold text-brand-300 mt-1">${fichas.length} asignada(s)</p>
+                    </div>
+                    <div class="rounded-xl bg-purple-950/40 border border-purple-900/40 p-4">
+                        <span class="text-[10px] uppercase tracking-wider text-purple-400">Instructoría</span>
+                        <p class="text-sm font-bold text-purple-200 mt-1">${fichas.length ? obtenerInstructoresFicha(fichas[0]).length : 0} instructor(es)</p>
+                    </div>
+                `;
+            }
+        }
+
+        function actualizarInstructoresExpediente(nombreFicha) {
+            const cont = document.getElementById('expediente-instructores');
+            const label = document.getElementById('expediente-ficha-instructores-label');
+            if (!cont) return;
+
+            const instructores = nombreFicha ? obtenerInstructoresFicha(nombreFicha) : [];
+            label.textContent = nombreFicha ? `Instructores asignados a ${nombreFicha}` : 'Seleccione una ficha.';
+            cont.innerHTML = instructores.length
+                ? instructores.map(ins => `
+                    <div class="rounded-xl bg-[#101817] border border-green-900/30 p-4 flex items-center gap-3">
+                        <div class="w-11 h-11 rounded-xl bg-green-900/30 border border-green-700/30 flex items-center justify-center text-green-300 font-bold">
+                            ${ins.nombre.split(' ').map(n => n[0]).slice(0,2).join('')}
+                        </div>
+                        <div class="min-w-0">
+                            <p class="text-sm font-bold text-white">${ins.nombre}</p>
+                            <p class="text-[10px] text-green-300">${ins.rol}</p>
+                            <p class="text-[10px] text-slate-500">${ins.area}</p>
+                            <p class="text-[9px] text-slate-500 truncate">${ins.email}</p>
+                        </div>
+                    </div>
+                `).join('')
+                : `<div class="rounded-xl border border-dashed border-green-900/40 p-5 text-center text-xs text-slate-500 md:col-span-2">No hay instructores registrados para esta ficha.</div>`;
+
+            const resumenFicha = document.getElementById('ficha-seleccionada-resumen');
+            if (resumenFicha) {
+                resumenFicha.innerHTML = nombreFicha
+                    ? `<p class="text-sm font-bold text-white">${nombreFicha}</p>
+                       <p class="text-[10px] text-slate-400 mt-1">${instructores.length} instructor(es) asignado(s)</p>
+                       <button onclick="actualizarInstructoresExpediente(decodeURIComponent('${encodeURIComponent(nombreFicha)}'))" class="mt-3 text-[10px] text-green-300 hover:text-white">Actualizar vista</button>`
+                    : 'Seleccione una ficha desde el expediente.';
+            }
+            lucide.createIcons();
+        }
+
+        function verInstructoresFicha(nombreCodificado) {
+            const nombreFicha = decodeURIComponent(nombreCodificado);
+            actualizarInstructoresExpediente(nombreFicha);
+            const modal = document.getElementById('modal-expediente-aprendiz');
+            if (modal && modal.classList.contains('hidden')) modal.classList.remove('hidden');
+        }
+
+        function abrirAsignarFicha() {
+            const aprendiz = aprendicesData.find(a => a.id === aprendizExpedienteActual);
+            if (!aprendiz) {
+                abrirExpedienteSeleccionado();
+                return;
+            }
+            normalizarFichasAprendiz(aprendiz);
+            const select = document.getElementById('select-ficha-aprendiz');
+            const disponibles = fichasAprendizData.filter(f => !aprendiz.assignedFichas.includes(f.nombre));
+            select.innerHTML = `<option value="">Seleccione una ficha...</option>` +
+                disponibles.map(f => `<option value="${f.nombre}">${f.nombre} · ${f.programa}</option>`).join('');
+            document.getElementById('asignar-ficha-aprendiz-nombre').textContent = aprendiz.nombre;
+            document.getElementById('preview-ficha-aprendiz').textContent = disponibles.length
+                ? 'La ficha seleccionada quedará visible inmediatamente en el expediente del aprendiz.'
+                : 'Este aprendiz ya tiene todas las fichas disponibles asignadas.';
+            document.getElementById('modal-asignar-ficha-aprendiz').classList.remove('hidden');
+            lucide.createIcons();
+        }
+
+        function cerrarAsignarFicha() {
+            document.getElementById('modal-asignar-ficha-aprendiz').classList.add('hidden');
+        }
+
+        function guardarFichaAprendiz(event) {
+            event.preventDefault();
+            const aprendiz = aprendicesData.find(a => a.id === aprendizExpedienteActual);
+            const ficha = document.getElementById('select-ficha-aprendiz').value;
+            if (!aprendiz || !ficha) return;
+
+            normalizarFichasAprendiz(aprendiz);
+            if (!aprendiz.assignedFichas.includes(ficha)) aprendiz.assignedFichas.push(ficha);
+            aprendiz.ficha = aprendiz.assignedFichas[0] || ficha;
+
+            cerrarAsignarFicha();
+            renderAprendicesTable();
+            abrirExpedienteAprendiz(aprendiz.id);
+            const codigo = obtenerFichaData(ficha)?.codigo;
+            actualizarInstructoresExpediente(ficha);
+
+            Swal.fire({
+                icon: 'success',
+                title: 'Ficha asignada',
+                text: `${ficha} fue asignada a ${aprendiz.nombre}${codigo ? `.` : '.'}`,
+                confirmButtonColor: '#39A900'
+            });
+        }
+
+        function cerrarExpediente() {
+            document.getElementById('modal-expediente-aprendiz').classList.add('hidden');
         }
 
         function filterAprendices(filterType) {
@@ -2232,6 +2653,9 @@ function renderAprendicesTable() {
                 }
             });
         }
-    </script>
+    
+        document.addEventListener('DOMContentLoaded', ()=>{ renderTransversales(); renderFichasInstructor(); renderJefaturaFicha(); });
+document.addEventListener('DOMContentLoaded',()=>{renderTransversales();renderFichasInstructor();renderJefaturaFicha();});
+</script>
 </body>
 </html>
